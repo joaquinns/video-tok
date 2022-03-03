@@ -1,0 +1,30 @@
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 3.5rem;
+  z-index: 11;
+  background-color: #ffffffaa;
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 1px 1px rgb(0 0 0 / 12%);
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+  flex: 1 1 0;
+  align-self: center;
+  max-width: 1200px;
+  margin-top: 3.5rem;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
