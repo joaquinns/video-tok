@@ -1,8 +1,9 @@
 import styles from './postvideo.module.css'
 import LikeIcon from '../Icons/LikeIcon'
 import clsx from 'clsx'
-import usePlayer from '../../../hooks/usePlayer'
+import usePlayer from '../../hooks/usePlayer'
 import PropTypes from 'prop-types'
+import Avatar from '../Avatar'
 
 export default function PostVideo() {
   const { handlePlay, playing, videoRef } = usePlayer()
@@ -14,9 +15,7 @@ export default function PostVideo() {
   return (
     <div className={styles.video_post}>
       <div className={styles.video_post_header}>
-        <div className={styles.avatar_container}>
-          <span>avatar</span>
-        </div>
+        <Avatar />
 
         <div className={styles.video_post_username}>
           <h3>Username</h3>
