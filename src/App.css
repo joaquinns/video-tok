@@ -15,16 +15,15 @@ header {
 main {
   display: flex;
   justify-content: space-between;
-  flex: 1 1 0;
+  flex: 1 1 auto;
   align-self: center;
   max-width: 1200px;
   margin-top: 3.5rem;
 }
 
 .App {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  overflow-x: hidden;
-  overflow-y: auto;
 }
