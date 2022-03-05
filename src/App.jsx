@@ -1,5 +1,9 @@
 import './App.css'
 import Navbar from './components/Navbar'
+import SideNavbar from './components/SideNavbar'
+import MainContentContainer from './components/MainContent'
+import Home from './pages/Home'
+import { Route } from 'wouter'
 
 function App() {
   return (
@@ -9,7 +13,16 @@ function App() {
       </header>
 
       <main>
-        <p>This works!</p>
+        <SideNavbar />
+        <MainContentContainer>
+          <Route path='/'>
+            <Home />
+          </Route>
+
+          <Route path='/login'>
+            <h1>Login :D</h1>
+          </Route>
+        </MainContentContainer>
       </main>
     </div>
   )

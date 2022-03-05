@@ -1,0 +1,36 @@
+.main_content {
+  margin-right: 16px;
+  margin-left: 16px;
+  width: 692px;
+  max-width: 692px;
+  padding: 24px 0;
+  position: relative;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 1.1rem 0;
+  position: relative;
+  max-width: 697px;
+}
+
+@media (max-width: 1079px) {
+  .container {
+    width: calc(100vw - 388px);
+  }
+}
+
+@media (max-width: 1071px) {
+  .container {
+    width: 592px;
+    max-width: 592px;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    width: calc(100vw - 32px - 68px);
+  }
+}
