@@ -2,6 +2,7 @@ import styles from './postvideo.module.css'
 import LikeIcon from '../Icons/LikeIcon'
 import clsx from 'clsx'
 import usePlayer from '../../../hooks/usePlayer'
+import PropTypes from 'prop-types'
 
 export default function PostVideo() {
   const { handlePlay, playing, videoRef } = usePlayer()
@@ -50,4 +51,12 @@ export default function PostVideo() {
       </div>
     </div>
   )
+}
+
+PostVideo.propTypes = {
+  username: PropTypes.string,
+  name: PropTypes.string,
+  description: PropTypes.string,
+  srcVideo: PropTypes.string,
+  likes: PropTypes.number
 }
