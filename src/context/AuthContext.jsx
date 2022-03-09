@@ -6,8 +6,18 @@ export const AuthContext = createContext()
 export function AuthContextProvider({ children }) {
   const [user, setUser] = useState()
 
+  const getSession = async () => {
+    const session = await supabase.auth.session()
+
+    setUser(session?.user ?? null)
+
+    await supabase.auth.onAuthStateChange(async (event, session) => {
+      setUser(session?.user ?? null)
+    })
+  }
+
   useEffect(() => {
-    const session = supabase.auth.session()
+    /*     const session = supabase.auth.session()
 
     setUser(session?.user ?? null)
 
@@ -15,9 +25,10 @@ export function AuthContextProvider({ children }) {
       async (event, session) => {
         setUser(session?.user ?? null)
       }
-    )
+    ) */
+    getSession()
 
-    return () => listener.unsubscribe()
+    return () => supabase.removeAllSubscriptions()
   }, [])
 
   const value = {
