@@ -1,7 +1,14 @@
 import { Link } from 'wouter'
+import { useAuth } from '../../context/AuthContext'
 import styles from './navbar.module.css'
+import Avatar from '../Avatar'
+import UploadIcon from '../Icons/UploadIcon'
 
 export default function Navbar() {
+  const { handleGithubLogin, user } = useAuth()
+  console.log(user?.user_metadata?.avatar_url)
+  console.log(user)
+
   return (
     <nav className={styles.navbar}>
       <div className={styles.logo_container}>
@@ -9,13 +16,27 @@ export default function Navbar() {
       </div>
 
       <div className={styles.links_container}>
-        <div className={styles.link}>
-          <Link to='/home'>
-            <a>Link</a>
-          </Link>
-        </div>
+        {user && (
+          <div className={styles.link}>
+            <Link to='/upload'>
+              <a>
+                <UploadIcon />
+              </a>
+            </Link>
+          </div>
+        )}
         <div className={styles.button_login_container}>
-          <button className={styles.button_login}>Login</button>
+          {user ? (
+            <Avatar
+              srcImage={user?.user_metadata?.avatar_url}
+              width={36}
+              height={36}
+            />
+          ) : (
+            <button className={styles.button_login} onClick={handleGithubLogin}>
+              Login
+            </button>
+          )}
         </div>
       </div>
     </nav>
