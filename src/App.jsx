@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import SideNavbar from './components/SideNavbar'
 import MainContentContainer from './components/MainContent'
 import Home from './pages/Home'
+import Upload from './pages/Upload'
 import { Route } from 'wouter'
 import { AuthContextProvider } from './context/AuthContext'
 
@@ -21,8 +22,8 @@ function App() {
               <Home />
             </Route>
 
-            <Route path='/login'>
-              <h1>Login :D</h1>
+            <Route path='/upload'>
+              <Upload />
             </Route>
           </MainContentContainer>
         </main>
