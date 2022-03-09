@@ -6,6 +6,7 @@
   max-width: 1200px;
   padding: 0 1.5;
   z-index: 11;
+  height: 100%;
 }
 
 @media (max-width: 1199px) {
@@ -16,13 +17,13 @@
 
 .links_container {
   display: flex;
-  gap: 1rem;
   align-items: center;
   justify-content: flex-end;
+  gap: 0.4rem;
 }
 
 .link {
-  padding: 1rem 1.5rem;
+  padding: 0.7rem 1.5rem;
   color: var(--black-color);
   border-radius: 4px;
   cursor: pointer;
