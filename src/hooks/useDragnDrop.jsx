@@ -5,7 +5,7 @@ import { useDropzone } from 'react-dropzone'
 export const useDragnDrop = () => {
   const [uploading, setUploading] = useState(false)
   const [uploaded, setUploaded] = useState(false)
-  const [video, setVideo] = useState('')
+  const [video, setVideo] = useState(null)
 
   const onDrop = async (files) => {
     console.log(files)
