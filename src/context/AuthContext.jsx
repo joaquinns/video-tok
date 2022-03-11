@@ -6,17 +6,16 @@ export const AuthContext = createContext()
 export function AuthContextProvider({ children }) {
   const [user, setUser] = useState()
 
-  const getSession = async () => {
-    const session = await supabase.auth.session()
-
-    setUser(session?.user ?? null)
-
-    await supabase.auth.onAuthStateChange(async (event, session) => {
-      setUser(session?.user ?? null)
-    })
-  }
-
   useEffect(() => {
+    const getSession = async () => {
+      const session = await supabase.auth.session()
+
+      setUser(session?.user ?? null)
+
+      await supabase.auth.onAuthStateChange(async (event, session) => {
+        setUser(session?.user ?? null)
+      })
+    }
     /*     const session = supabase.auth.session()
 
     setUser(session?.user ?? null)
@@ -26,14 +25,13 @@ export function AuthContextProvider({ children }) {
         setUser(session?.user ?? null)
       }
     ) */
-    getSession()
 
-    return () => supabase.removeAllSubscriptions()
+    getSession()
   }, [])
 
   const value = {
-    handleGithubLogin: () => {
-      supabase.auth.signIn({
+    handleGithubLogin: async () => {
+      await supabase.auth.signIn({
         provider: 'github'
       })
     },
