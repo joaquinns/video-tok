@@ -3,10 +3,13 @@ import { supabase } from './supabase'
 const prefix = import.meta.env.VITE_SUPABASE_STORAGE_URL
 
 export const getVideos = async () => {
-  const { data: videos, error } = await supabase.from('videos').select(`
-    *
+  const { data: videos, error } = await supabase.from('videos').select(
+    `
+    *, user_id (*
     )
-  `)
+  `
+  )
+  console.log(videos)
   return [error, videos]
 }
 
@@ -26,8 +29,6 @@ export const publishVideo = async ({ userId, videoSrc, videoDescription }) => {
   const { data, error } = await supabase
     .from('videos')
     .insert([{ user_id: userId, description: videoDescription, src: videoSrc }])
-
-  console.log(await supabase.from('videos').select(`src, user_id(email)`))
 
   return [error, data]
 }
