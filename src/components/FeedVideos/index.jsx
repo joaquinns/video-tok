@@ -25,7 +25,7 @@ export default function FeedVideos() {
       {postVideos.length > 0 ? (
         postVideos.map((postVideo) => (
           <PostVideo
-            key={postVideo}
+            key={postVideo.id}
             srcVideo={postVideo.src}
             description={postVideo.description}
             avatarURL={postVideo.user_id.avatar_url}

@@ -2,10 +2,12 @@ import styles from './sidenavbar.module.css'
 import { HomeIcon } from '../Icons/HomeIcon'
 import { VideoIcon } from '../Icons/VideoIcon'
 import { Link } from 'wouter'
-
-// recordar hacer iconos
+import { useAuth } from '../../context/AuthContext'
+import Avatar from '../Avatar'
 
 export default function SideNavbar() {
+  const { user } = useAuth()
+
   return (
     <div>
       <div className={styles.sidenavbar_container}>
@@ -22,8 +24,19 @@ export default function SideNavbar() {
                 <VideoIcon />
                 <h2>Video</h2>
               </a>
+              {user && (
+                <Link to={`/profile/${user.id}`}>
+                  <a className={styles.nav_link}>
+                    <Avatar
+                      srcImage={user.user_metadata.avatar_url}
+                      width={40}
+                      height={40}
+                    />
+                    <h2>{user.user_metadata.user_name}</h2>
+                  </a>
+                </Link>
+              )}
             </div>
-            <div>Avatar</div>
           </div>
         </div>
       </div>

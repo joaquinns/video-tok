@@ -4,6 +4,7 @@ import SideNavbar from './components/SideNavbar'
 import MainContentContainer from './components/MainContent'
 import Home from './pages/Home'
 import Upload from './pages/Upload'
+import Profile from './pages/Profile'
 import { Route } from 'wouter'
 import { AuthContextProvider } from './context/AuthContext'
 
@@ -20,6 +21,10 @@ function App() {
           <MainContentContainer>
             <Route path='/'>
               <Home />
+            </Route>
+
+            <Route path='/profile/:userId'>
+              {(params) => <Profile userId={params.userId} />}
             </Route>
 
             <Route path='/upload'>
