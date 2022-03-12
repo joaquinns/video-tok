@@ -1,0 +1,13 @@
+.profile_container {
+  margin-left: 0.8rem;
+  width: 624px;
+  flex: 1 1 624px;
+}
+
+@media (max-width: 479px) {
+  .profile_container {
+    margin-left: 0;
+    width: 100%;
+    flex: 0 0 100%;
+  }
+}
