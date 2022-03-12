@@ -35,9 +35,9 @@ export const uploadVideo = async ({ videoFile }) => {
 }
 
 export const publishVideo = async ({ userId, videoSrc, videoDescription }) => {
-  const { data, error } = await supabase
+  const { data: video, error } = await supabase
     .from('videos')
     .insert([{ user_id: userId, description: videoDescription, src: videoSrc }])
 
-  return [error, data]
+  return [error, video]
 }
