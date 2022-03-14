@@ -43,6 +43,10 @@
   font-weight: 400;
 }
 
+.video_post_description {
+  text-align: left;
+}
+
 .video_wrapper {
   display: flex;
   flex-direction: row;
