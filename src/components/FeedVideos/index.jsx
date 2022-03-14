@@ -1,28 +1,40 @@
 import { useEffect, useState } from 'react'
 import { getVideos } from '../../services'
 import PostVideo from '../PostVideo'
+import PostVideoSkeleton from '../PostVideoSkeleton'
 import styles from './feedVideos.module.css'
 
 export default function FeedVideos() {
+  const [loading, setLoading] = useState(false)
   const [postVideos, setPostVideos] = useState([])
-  const [error, setError] = useState(null)
-
-  const fetchVideos = async () => {
-    const [error, videos] = await getVideos()
-    if (error) console.error(error)
-    setError(error)
-    setPostVideos(videos)
-  }
-
-  console.log(error)
+  // const [error, setError] = useState(null)
 
   useEffect(() => {
+    const controller = new AbortController()
+    const signal = controller.signal
+    const fetchVideos = async () => {
+      setLoading(true)
+      const [error, videos] = await getVideos(signal)
+      if (error && error.code === 20) {
+        return console.log('aborted')
+      } else {
+        console.log(error)
+      }
+      setPostVideos(videos)
+      setLoading(false)
+    }
     fetchVideos()
+
+    return function cleanup() {
+      controller.abort()
+    }
   }, [])
 
   return (
     <div className={styles.feed_container}>
-      {postVideos.length > 0 ? (
+      {loading ? (
+        <PostVideoSkeleton />
+      ) : (
         postVideos.map((postVideo) => (
           <PostVideo
             key={postVideo.id}
@@ -32,8 +44,6 @@ export default function FeedVideos() {
             username={postVideo.user_id.username}
           />
         ))
-      ) : (
-        <h1>No videos to show x.x</h1>
       )}
     </div>
   )
