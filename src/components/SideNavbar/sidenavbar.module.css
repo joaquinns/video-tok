@@ -42,6 +42,8 @@
   gap: 0.5rem;
   transition: background-color 300ms ease;
   width: 100%;
+  text-decoration: none;
+  color: var(--black-color);
 }
 
 .nav_link:hover {
