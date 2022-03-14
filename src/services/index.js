@@ -2,22 +2,26 @@ import { supabase } from './supabase'
 
 const prefix = import.meta.env.VITE_SUPABASE_STORAGE_URL
 
-export const getVideos = async () => {
-  const { data: videos, error } = await supabase.from('videos').select(
-    `
+export const getVideos = async (signal) => {
+  const { data: videos, error } = await supabase
+    .from('videos')
+    .select(
+      `
     *, user_id (*
     )
-  `
-  )
+    `
+    )
+    .abortSignal(signal)
   console.log(videos)
   return [error, videos]
 }
 
-export const getUserVideos = async (userId) => {
+export const getUserVideos = async (userId, signal) => {
   const { data: videos, error } = await supabase
     .from('videos')
     .select(`*, user_id (*)`)
     .eq('user_id', `${userId}`)
+    .abortSignal(signal)
   // .or(`user_id.eq.${userId}`)
   console.log([error, videos])
   return [error, videos]
