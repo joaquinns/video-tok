@@ -1,0 +1,9 @@
+.content_skeleton > svg {
+  height: 600px;
+}
+
+@media (max-width: 480px) {
+  .content_skeleton > svg {
+    height: 400px;
+  }
+}
