@@ -111,15 +111,6 @@
 .description_input_form:focus-visible {
   outline: none;
 }
-
-@media (max-width: 767px) {
-  .form_container {
-    margin-top: 0.8rem;
-    align-self: flex-start;
-    width: 90%;
-  }
-}
-
 .form_container > button {
   margin-top: 1rem;
   align-self: center;
@@ -137,6 +128,18 @@
 .form_container > button:hover {
   color: white;
   background-color: var(--blue-color);
+}
+
+@media (max-width: 767px) {
+  .form_container {
+    margin-top: 0.8rem;
+    align-self: flex-start;
+    width: 90%;
+  }
+
+  .form_container > button {
+    align-self: stretch;
+  }
 }
 
 .reject {
