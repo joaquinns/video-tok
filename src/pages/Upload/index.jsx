@@ -1,11 +1,16 @@
+import { useState } from 'react'
 import clsx from 'clsx'
 import UploadIconB from '../../components/Icons/UploadIconB'
 import styles from './upload.module.css'
 import { publishVideo } from '../../services'
 import { useAuth } from '../../context/AuthContext'
 import { useDragnDrop } from '../../hooks/useDragnDrop'
+import Notification from '../../components/Notification'
+import { useLocation } from 'wouter'
 
 export default function Upload() {
+  const [, setLocation] = useLocation()
+  const [error, setError] = useState(null)
   const { user } = useAuth()
   const {
     getInputProps,
@@ -29,10 +34,17 @@ export default function Upload() {
     const [error, data] = await publishVideo({
       userId: user.id,
       videoSrc: video,
-      videoDescription: e.target.description.value
+      videoDescription:
+        e.target.description.value.length > 4
+          ? e.target.description.value
+          : null
     })
-    if (error) console.error(error)
+    if (error) {
+      console.log(error)
+      setError(error.code)
+    }
     console.log('PUBLICADO', data)
+    setLocation('/')
   }
 
   return (
@@ -68,6 +80,12 @@ export default function Upload() {
             name='description'
           />
 
+          {error &&
+            (error === '23502' ? (
+              <Notification text='You need to upload a video' />
+            ) : (
+              error
+            ))}
           <button>Upload!</button>
         </div>
       </form>
