@@ -2,27 +2,40 @@ import { useEffect, useState } from 'react'
 import styles from './profile.module.css'
 import PostVideo from '../../components/PostVideo'
 import { getUserVideos } from '../../services/index'
+import PostVideoSkeleton from '../../components/PostVideoSkeleton'
 
 export default function Profile({ userId }) {
+  const [loading, setLoading] = useState(false)
   const [profilePosts, setProfilePosts] = useState([])
 
-  const fetchProfileVideos = async () => {
-    const [error, videos] = await getUserVideos(userId)
-    if (error) {
-      throw console.error(error)
-    }
-    setProfilePosts(videos)
-  }
-
   useEffect(() => {
+    const controller = new AbortController()
+    const signal = controller.signal
+    const fetchProfileVideos = async () => {
+      setLoading(true)
+      const [error, videos] = await getUserVideos(userId, signal)
+      if (error && error.code === 20) {
+        return console.log('aborted')
+      } else {
+        console.log(error)
+      }
+      setProfilePosts(videos)
+      setLoading(false)
+    }
     fetchProfileVideos()
+
+    return () => {
+      controller.abort()
+    }
   }, [])
 
   return (
     <div className={styles.profile_container}>
       <h1>Profile</h1>
 
-      {profilePosts.length > 0 ? (
+      {loading ? (
+        <PostVideoSkeleton />
+      ) : (
         profilePosts.map((postVideo) => (
           <PostVideo
             key={postVideo.id}
@@ -32,8 +45,6 @@ export default function Profile({ userId }) {
             username={postVideo.user_id.username}
           />
         ))
-      ) : (
-        <h1>You dont have videos x.x</h1>
       )}
     </div>
   )
