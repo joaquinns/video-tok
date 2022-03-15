@@ -40,11 +40,11 @@ export default function Upload() {
           : null
     })
     if (error) {
-      console.log(error)
       setError(error.code)
+      return console.log(error)
     }
-    console.log('PUBLICADO', data)
     setLocation('/')
+    console.log('PUBLICADO', data)
   }
 
   return (
