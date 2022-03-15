@@ -55,3 +55,41 @@
 .button_login:hover {
   opacity: 0.8;
 }
+
+.button_login_container {
+  position: relative;
+}
+
+.button_logout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.3rem;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+}
+
+.logout {
+  position: absolute;
+  top: 4rem;
+  right: 0;
+  width: 8rem;
+  height: 4rem;
+  background-color: whitesmoke;
+}
+
+.logout > button {
+  width: 100%;
+  border: none;
+  height: 60%;
+  background-color: whitesmoke;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.logout > button:hover {
+  background-color: rgb(231, 231, 231);
+}

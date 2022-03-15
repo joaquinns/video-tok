@@ -1,10 +1,13 @@
+import { useState } from 'react'
 import { Link } from 'wouter'
 import { useAuth } from '../../context/AuthContext'
 import styles from './navbar.module.css'
 import Avatar from '../Avatar'
 import UploadIcon from '../Icons/UploadIcon'
+import { Logout } from '../../services'
 
 export default function Navbar() {
+  const [toggle, setToggle] = useState(false)
   const { handleGithubLogin, user } = useAuth()
   console.log(user?.user_metadata?.avatar_url)
   console.log(user)
@@ -17,21 +20,31 @@ export default function Navbar() {
 
       <div className={styles.links_container}>
         {user && (
-          <div className={styles.link}>
-            <Link to='/upload'>
-              <a>
-                <UploadIcon />
-              </a>
-            </Link>
-          </div>
+          <Link to='/upload'>
+            <a className={styles.link}>
+              <UploadIcon />
+            </a>
+          </Link>
         )}
         <div className={styles.button_login_container}>
           {user ? (
-            <Avatar
-              srcImage={user?.user_metadata?.avatar_url}
-              width={36}
-              height={36}
-            />
+            <>
+              <button
+                className={styles.button_logout}
+                onClick={() => setToggle(!toggle)}
+              >
+                <Avatar
+                  srcImage={user?.user_metadata?.avatar_url}
+                  width={36}
+                  height={36}
+                />
+              </button>
+              {toggle && (
+                <div className={styles.logout}>
+                  <button onClick={Logout}>logout</button>
+                </div>
+              )}
+            </>
           ) : (
             <button className={styles.button_login} onClick={handleGithubLogin}>
               Login
