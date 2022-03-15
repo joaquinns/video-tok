@@ -1,0 +1,44 @@
+.nav_link {
+  display: flex;
+  position: relative;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  gap: 0.5rem;
+  transition: background-color 300ms ease;
+  width: 100%;
+  text-decoration: none;
+  color: var(--black-color);
+}
+
+.nav_link:hover {
+  background-color: rgba(22, 24, 35, 0.04);
+}
+
+.nav_link > h2 {
+  font-size: 18px;
+}
+
+.nav_link > svg {
+  fill: var(--black-color);
+}
+
+.nav_link_active {
+  color: var(--blue-color);
+}
+
+.nav_link_active > svg {
+  fill: var(--blue-color);
+}
+
+@media (max-width: 1071px) {
+  .nav_link {
+    justify-content: center;
+  }
+
+  .nav_link > h2 {
+    display: none;
+  }
+}
