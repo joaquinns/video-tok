@@ -45,3 +45,8 @@ export const publishVideo = async ({ userId, videoSrc, videoDescription }) => {
 
   return [error, video]
 }
+
+export const Logout = async () => {
+  const { error } = await supabase.auth.signOut()
+  if (error) return console.error(error)
+}
