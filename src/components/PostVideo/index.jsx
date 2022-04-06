@@ -1,21 +1,45 @@
+import { useRef } from 'react'
 import styles from './postvideo.module.css'
 import LikeIcon from '../Icons/LikeIcon'
 import clsx from 'clsx'
 import usePlayer from '../../hooks/usePlayer'
 import PropTypes from 'prop-types'
 import Avatar from '../Avatar'
+import DeleteIcon from '../Icons/DeleteIcon'
+import { useAuth } from '../../context/AuthContext'
+import { useLikesCount } from '../../hooks/useLikesCount'
+import { deleteVideo } from '../../services/'
 
 export default function PostVideo({
   description,
   srcVideo,
   avatarURL,
-  username
+  username,
+  postId,
+  likes,
+  userPost
 }) {
-  const { handlePlay, playing, videoRef } = usePlayer()
+  const { user } = useAuth()
+  const userId = user.id
+  const video = useRef(null)
+  const { handlePlay, playing } = usePlayer(video)
+  const { toggleLike, likesNumber, like } = useLikesCount({
+    userId,
+    postId,
+    likes
+  })
 
   const playerClassname = clsx(styles.player, {
     [styles.hidden]: playing
   })
+
+  const likeClassname = clsx(styles.like_icon, {
+    [styles.liked]: like
+  })
+
+  const handleDelete = (postId) => {
+    deleteVideo(postId)
+  }
 
   return (
     <div className={styles.video_post}>
@@ -24,8 +48,16 @@ export default function PostVideo({
 
         <div className={styles.video_post_username}>
           <h3>{username}</h3>
-          <h4>name</h4>
         </div>
+
+        {user && user.id === userPost && (
+          <button
+            className={styles.deleteButton}
+            onClick={() => handleDelete(postId)}
+          >
+            <DeleteIcon />
+          </button>
+        )}
       </div>
 
       <p className={styles.video_post_description}>{description}</p>
@@ -34,24 +66,24 @@ export default function PostVideo({
           <div className={styles.video_player_container}>
             <video
               src={srcVideo}
-              ref={videoRef}
+              // ref={videoRef}
+              ref={video}
               controls={false}
               onClick={handlePlay}
+              preload='auto'
               loop
-              preload='none'
-            ></video>
+            />
             <i className={playerClassname} onClick={handlePlay}></i>
           </div>
         </div>
 
         <div className={styles.video_actions_container}>
-          <button className={styles.action_button}>
-            <span className={styles.like_icon}>
+          <button className={styles.action_button} onClick={toggleLike}>
+            <span className={likeClassname}>
               <LikeIcon />
             </span>
-            <strong className={styles.strong_text}>123</strong>
           </button>
-          <button className={styles.action_button}>1</button>
+          <strong className={styles.strong_text}>{likesNumber}</strong>
         </div>
       </div>
     </div>
@@ -59,9 +91,11 @@ export default function PostVideo({
 }
 
 PostVideo.propTypes = {
-  username: PropTypes.string,
-  name: PropTypes.string,
   description: PropTypes.string,
   srcVideo: PropTypes.string,
-  likes: PropTypes.number
+  avatarURL: PropTypes.string,
+  username: PropTypes.string,
+  postId: PropTypes.number,
+  likes: PropTypes.number,
+  userPost: PropTypes.string
 }
