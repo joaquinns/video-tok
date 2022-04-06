@@ -6,6 +6,7 @@ export const useDragnDrop = () => {
   const [uploading, setUploading] = useState(false)
   const [uploaded, setUploaded] = useState(false)
   const [video, setVideo] = useState(null)
+  const [reject, setReject] = useState(false)
 
   const onDrop = async (files) => {
     console.log(files)
@@ -13,6 +14,9 @@ export const useDragnDrop = () => {
     setUploading(true)
     const [error, videoURL] = await uploadVideo({ videoFile: file })
     setUploading(false)
+    if (error) {
+      return handleCancel()
+    }
     setUploaded(true)
     setVideo(videoURL)
     console.log(error)
@@ -31,11 +35,19 @@ export const useDragnDrop = () => {
     if (isDragReject) console.log('no compa')
   }, [isDragReject])
 
+  const handleCancel = () => {
+    setUploaded(false)
+    setReject(false)
+    setUploading(false)
+    setVideo(null)
+  }
+
   const onDragRender = () => {
-    if (isDragReject) return <h3>{`can't upload this type of file`}</h3>
+    if (isDragReject || reject)
+      return <h3>can&apos;t upload this type of file</h3>
     if (isDragAccept) return <h3>Drop to upload!</h3>
     if (uploading) return <h3>Uploading...</h3>
-    if (!uploading && !uploaded) return <h3>Uploaded!</h3>
+    if (!uploading && uploaded) return <h3>Uploaded!</h3>
 
     return <h3>Select a video to upload</h3>
   }
@@ -47,6 +59,8 @@ export const useDragnDrop = () => {
     onDragRender,
     isDragReject,
     isDragAccept,
-    uploaded
+    uploaded,
+    reject,
+    handleCancel
   }
 }
