@@ -36,6 +36,7 @@
 }
 
 .upload_card {
+  position: relative;
   width: 260px;
   height: 458px;
   border: 2px dashed var(--light-grey-color);
@@ -111,7 +112,15 @@
 .description_input_form:focus-visible {
   outline: none;
 }
-.form_container > button {
+
+.action_buttons_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.button_upload {
   margin-top: 1rem;
   align-self: center;
   padding: 0.8rem 1.2rem;
@@ -125,9 +134,26 @@
   transition: all ease-in-out 170ms;
 }
 
-.form_container > button:hover {
+.button_upload:hover {
   color: white;
   background-color: var(--blue-color);
+}
+
+.button_cancel {
+  margin-top: 1rem;
+  align-self: center;
+  padding: 0.8rem 1.2rem;
+  font-size: 16px;
+  font-weight: 600;
+  border: 2px solid var(--red-color);
+  background-color: var(--red-color);
+  color: var(--white-color);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all ease-in-out 170ms;
+}
+.button_cancel:hover {
+  opacity: 0.8;
 }
 
 @media (max-width: 767px) {
@@ -137,8 +163,11 @@
     width: 90%;
   }
 
-  .form_container > button {
+  .action_buttons_container {
+    display: flex;
+    flex-direction: column;
     align-self: stretch;
+    gap: 0;
   }
 }
 
@@ -150,6 +179,10 @@
 .accepted {
   border-color: var(--blue-color);
   background-color: #077fcf41;
+}
+.accepted:hover {
+  border-color: none;
+  cursor: none;
 }
 
 .uploaded {

@@ -19,7 +19,8 @@ export default function Upload() {
     isDragReject,
     onDragRender,
     video,
-    uploaded
+    uploaded,
+    handleCancel
   } = useDragnDrop()
 
   const classNamesDnD = clsx(styles.upload_card, {
@@ -41,6 +42,9 @@ export default function Upload() {
     })
     if (error) {
       setError(error.code)
+      setTimeout(() => {
+        setError(false)
+      }, 2301)
       return console.log(error)
     }
     setLocation('/')
@@ -80,13 +84,18 @@ export default function Upload() {
             name='description'
           />
 
-          {error &&
-            (error === '23502' ? (
-              <Notification text='You need to upload a video' />
-            ) : (
-              error
-            ))}
-          <button>Upload!</button>
+          {error && (
+            <Notification text='You need to upload and fill all the inputs' />
+          )}
+
+          <div className={styles.action_buttons_container}>
+            {uploaded && (
+              <button className={styles.button_cancel} onClick={handleCancel}>
+                Cancel
+              </button>
+            )}
+            <button className={styles.button_upload}>Upload!</button>
+          </div>
         </div>
       </form>
     </div>
