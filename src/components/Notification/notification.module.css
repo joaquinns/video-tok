@@ -1,0 +1,45 @@
+.notification {
+  position: relative;
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: rgba(254, 44, 85, 1);
+  border-radius: 4px;
+  font-weight: 700;
+  color: var(--white-color);
+  transition: transform 0.3s ease-out;
+}
+
+.slideIn {
+  animation-name: slideIn;
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
+}
+
+.close_button {
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  padding: 0 0.4rem;
+  position: absolute;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--white-color);
+  top: 3px;
+  right: 3px;
+  cursor: pointer;
+}
+
+.slideOut {
+  transform: translateX(150%);
+  flex: 0;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+}
