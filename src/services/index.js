@@ -13,7 +13,6 @@ export const getVideos = async (signal) => {
     )
     .order('created_at', { ascending: false })
     .abortSignal(signal)
-  console.log(videos)
   return [error, videos]
 }
 
