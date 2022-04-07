@@ -1,4 +1,4 @@
-![Screenshoot](https://github.com/joaquinns/react-giff-app/blob/main/ghiffapp.JPG?raw=true)
+![Screenshoot](https://github.com/joaquinns/video-tok/blob/master/videotok.PNG?raw=true)
 
 # Getting Started with Video tok
 
