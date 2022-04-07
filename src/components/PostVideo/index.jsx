@@ -9,6 +9,7 @@ import DeleteIcon from '../Icons/DeleteIcon'
 import { useAuth } from '../../context/AuthContext'
 import { useLikesCount } from '../../hooks/useLikesCount'
 import { deleteVideo } from '../../services/'
+import { useLocation } from 'wouter'
 
 export default function PostVideo({
   description,
@@ -20,6 +21,7 @@ export default function PostVideo({
   userPost
 }) {
   const { user } = useAuth()
+  const [, setLocation] = useLocation()
   const userId = user?.id
   const video = useRef(null)
   const { handlePlay, playing } = usePlayer(video)
@@ -39,6 +41,7 @@ export default function PostVideo({
 
   const handleDelete = (postId) => {
     deleteVideo(postId)
+    setLocation('/')
   }
 
   return (
