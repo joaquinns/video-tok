@@ -15,7 +15,7 @@ export const useGetVideos = ({ userId = null }) => {
         ? await getUserVideos(userId, signal)
         : await getVideos(signal)
       if (error && error.code === 20) {
-        return console.log('aborted')
+        return
       }
 
       if (error) setError(true)

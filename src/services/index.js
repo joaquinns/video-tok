@@ -24,8 +24,6 @@ export const getUserVideos = async (userId, signal) => {
     .eq('user_id', `${userId}`)
     .order('created_at', { ascending: false })
     .abortSignal(signal)
-  // .or(`user_id.eq.${userId}`)
-  console.log([error, videos])
   return [error, videos]
 }
 
@@ -62,7 +60,7 @@ export const deleteVideo = async (postId) => {
     return [{ error: 'Error deleting the data' }]
   }
 
-  console.log(data)
+  return { data }
 }
 
 export const likeVideo = async (postId, userId) => {
@@ -70,8 +68,6 @@ export const likeVideo = async (postId, userId) => {
     .from('videos')
     .update({ likes: `{${userId}}` })
     .eq('id', postId)
-
-  console.log(data)
 
   return [error, data]
 }
@@ -81,18 +77,7 @@ export const unlikeVideo = async (postId, userId) => {
     .from('videos')
     .update({ likes: `{${[].filter((id) => id !== userId)}}` })
     .eq('id', postId)
-  console.log(postId, userId)
-  console.log(error, data)
   return [error, data]
-
-  /*   const { error, data } = await supabase
-    .from('videos')
-    .update({ likes: [] })
-    .eq('id', postId)
-
-  console.log(error, data)
-
-  */
 }
 
 export const checkLike = async (postId, userId) => {

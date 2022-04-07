@@ -10,7 +10,6 @@ export const useDragnDrop = () => {
   const [reject, setReject] = useState(false)
 
   const onDrop = async (files) => {
-    console.log(files)
     const [file] = files
     setUploading(true)
     const [error, videoURL] = await uploadVideo({ videoFile: file })
@@ -20,7 +19,6 @@ export const useDragnDrop = () => {
     }
     setUploaded(true)
     setVideo(videoURL)
-    console.log(error)
     console.log('uploaded!')
   }
 
