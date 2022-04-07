@@ -5,7 +5,8 @@ export const useLikesCount = ({ userId, postId, likes }) => {
   const [likesNumber, setLikesNumber] = useState(likes)
   const [like, setLike] = useState(false)
 
-  const toggleLike = () => {
+  const toggleLike = (userId) => {
+    if (!userId) return console.log('you need to loggin')
     setLike(!like)
     if (like) {
       unlikeVideo(postId, userId).then((res) =>
