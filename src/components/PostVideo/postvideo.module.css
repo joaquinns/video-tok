@@ -86,7 +86,7 @@
 .player {
   width: 62px;
   height: 62px;
-  background-image: url(src/assets/player.png);
+  background-image: url(static/player.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
