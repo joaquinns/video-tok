@@ -20,7 +20,7 @@ export default function PostVideo({
   userPost
 }) {
   const { user } = useAuth()
-  const userId = user.id
+  const userId = user?.id
   const video = useRef(null)
   const { handlePlay, playing } = usePlayer(video)
   const { toggleLike, likesNumber, like } = useLikesCount({
@@ -78,12 +78,15 @@ export default function PostVideo({
         </div>
 
         <div className={styles.video_actions_container}>
-          <button className={styles.action_button} onClick={toggleLike}>
+          <button
+            className={styles.action_button}
+            onClick={() => toggleLike(userId)}
+          >
             <span className={likeClassname}>
               <LikeIcon />
             </span>
           </button>
-          <strong className={styles.strong_text}>{likesNumber}</strong>
+          <strong className={styles.number_likes_post}>{likesNumber}</strong>
         </div>
       </div>
     </div>
