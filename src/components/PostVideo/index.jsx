@@ -2,7 +2,7 @@ import { useRef } from 'react'
 import styles from './postvideo.module.css'
 import LikeIcon from '../Icons/LikeIcon'
 import clsx from 'clsx'
-import usePlayer from '../../hooks/usePlayer'
+// import usePlayer from '../../hooks/usePlayer'
 import PropTypes from 'prop-types'
 import Avatar from '../Avatar'
 import DeleteIcon from '../Icons/DeleteIcon'
@@ -10,6 +10,7 @@ import { useAuth } from '../../context/AuthContext'
 import { useLikesCount } from '../../hooks/useLikesCount'
 import { deleteVideo } from '../../services/'
 import { useLocation } from 'wouter'
+import useIntersectionVideoPlayer from '../../hooks/useIntersectionVideo'
 
 export default function PostVideo({
   description,
@@ -24,7 +25,8 @@ export default function PostVideo({
   const [, setLocation] = useLocation()
   const userId = user?.id
   const video = useRef(null)
-  const { handlePlay, playing } = usePlayer(video)
+  // const { handlePlay, playing } = usePlayer(video)
+  const { handlePlay, playing } = useIntersectionVideoPlayer({ video })
   const { toggleLike, likesNumber, like } = useLikesCount({
     userId,
     postId,
