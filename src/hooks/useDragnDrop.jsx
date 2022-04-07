@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { uploadVideo } from '../services'
 import { useDropzone } from 'react-dropzone'
+import Spinner from '../components/Spinner'
 
 export const useDragnDrop = () => {
   const [uploading, setUploading] = useState(false)
@@ -46,7 +47,7 @@ export const useDragnDrop = () => {
     if (isDragReject || reject)
       return <h3>can&apos;t upload this type of file</h3>
     if (isDragAccept) return <h3>Drop to upload!</h3>
-    if (uploading) return <h3>Uploading...</h3>
+    if (uploading) return <Spinner />
     if (!uploading && uploaded) return <h3>Uploaded!</h3>
 
     return <h3>Select a video to upload</h3>
