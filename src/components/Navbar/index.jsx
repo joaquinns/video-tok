@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'wouter'
+import { Link, useLocation } from 'wouter'
 import { useAuth } from '../../context/AuthContext'
 import styles from './navbar.module.css'
 import Avatar from '../Avatar'
@@ -7,10 +7,16 @@ import UploadIcon from '../Icons/UploadIcon'
 import { Logout } from '../../services'
 
 export default function Navbar() {
+  const [, setLocation] = useLocation()
   const [toggle, setToggle] = useState(false)
   const { handleGithubLogin, user } = useAuth()
   console.log(user?.user_metadata?.avatar_url)
   console.log(user)
+
+  const handleLogout = () => {
+    Logout()
+    setLocation('/')
+  }
 
   return (
     <nav className={styles.navbar}>
@@ -41,7 +47,7 @@ export default function Navbar() {
               </button>
               {toggle && (
                 <div className={styles.logout}>
-                  <button onClick={Logout}>logout</button>
+                  <button onClick={handleLogout}>logout</button>
                 </div>
               )}
             </>
