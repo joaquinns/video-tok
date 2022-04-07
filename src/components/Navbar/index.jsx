@@ -15,7 +15,7 @@ export default function Navbar() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.logo_container}>
-        <h1>App</h1>
+        <h1>Social-Video</h1>
       </div>
 
       <div className={styles.links_container}>
