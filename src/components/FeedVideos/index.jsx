@@ -7,13 +7,19 @@ import { useGetVideos } from '../../hooks/useGetVideos'
 export default function FeedVideos() {
   const { error, loading, postVideos } = useGetVideos({})
 
+  if (error) {
+    return (
+      <div className={styles.feed_container}>
+        <Error />
+      </div>
+    )
+  }
+
   return (
     <div className={styles.feed_container}>
-      {error && <Error />}
       {loading ? (
         <PostVideoSkeleton />
       ) : (
-        !error &&
         postVideos.map((postVideo) => (
           <PostVideo
             key={postVideo.id}
