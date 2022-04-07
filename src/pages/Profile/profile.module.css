@@ -11,3 +11,19 @@
     flex: 0 0 100%;
   }
 }
+
+.button_redirect_create {
+  border-radius: 4px;
+  background-color: var(--blue-color);
+  font-weight: 600;
+  font-size: large;
+  border: 1px solid transparent;
+  color: var(--white-color);
+  padding: 0.8rem 1.6rem;
+  transition: transform ease 300ms;
+  cursor: pointer;
+}
+
+.button_redirect_create:hover {
+  transform: scale(1.1);
+}
