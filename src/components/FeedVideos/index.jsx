@@ -22,7 +22,14 @@ export default function FeedVideos() {
             avatarURL={postVideo.user_id.avatar_url}
             username={postVideo.user_id.username}
             postId={postVideo.id}
-            likes={postVideo.likes.length}
+            likes={
+              (postVideo.likes?.length === null) |
+              undefined |
+              NaN |
+              !postVideo.likes
+                ? 0
+                : postVideo.likes?.length
+            }
             userPost={postVideo.user_id.id}
           />
         ))
