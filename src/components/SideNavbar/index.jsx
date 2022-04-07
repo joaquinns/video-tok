@@ -3,15 +3,9 @@ import { HomeIcon } from '../Icons/HomeIcon'
 import { Profile } from '../Icons/ProfileIcon'
 import { useAuth } from '../../context/AuthContext'
 import { ActiveLink } from '../ActiveLink'
-// import Avatar from '../Avatar'
-// import clsx from 'clsx'
 
 export default function SideNavbar() {
   const { user } = useAuth()
-
-  /*   const activeLink = clsx(styles.nav_link, {
-    [styles.nav_link_active]: isActive
-  }) */
 
   return (
     <div>
