@@ -10,8 +10,6 @@ export default function Navbar() {
   const [, setLocation] = useLocation()
   const [toggle, setToggle] = useState(false)
   const { handleGithubLogin, user } = useAuth()
-  console.log(user?.user_metadata?.avatar_url)
-  console.log(user)
 
   const handleLogout = () => {
     Logout()
