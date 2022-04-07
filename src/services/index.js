@@ -11,6 +11,7 @@ export const getVideos = async (signal) => {
     )
     `
     )
+    .order('created_at', { ascending: false })
     .abortSignal(signal)
   console.log(videos)
   return [error, videos]
@@ -21,6 +22,7 @@ export const getUserVideos = async (userId, signal) => {
     .from('videos')
     .select(`*, user_id (*)`)
     .eq('user_id', `${userId}`)
+    .order('created_at', { ascending: false })
     .abortSignal(signal)
   // .or(`user_id.eq.${userId}`)
   console.log([error, videos])
